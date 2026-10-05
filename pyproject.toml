@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcsparse"
+version = "0.1.0"
+description = "Token-sparse attention for MiniMax-H3, pure CuteDSL + Triton"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+
+# No compiled extension. The token-sparse kernel is CuteDSL (JIT-compiled by
+# nvidia-cutlass-dsl at first call) and the block-probability pass is Triton,
+# so installing needs neither nvcc nor a CUDA toolkit.
+dependencies = [
+    "torch>=2.4",
+    "nvidia-cutlass-dsl==4.5.2",
+    "triton>3.3.0",
+    "quack-kernels==0.3.6",
+    "einops",
+    "numpy",
+]
+
+[project.optional-dependencies]
+# The H3 pipeline itself. Kept optional so the kernels can be used standalone.
+h3 = ["diffusers>=0.36", "transformers", "accelerate", "imageio",
+      "imageio-ffmpeg"]
+# Scoring against a dense reference.
+eval = ["lpips", "torchmetrics", "scikit-image", "imageio", "imageio-ffmpeg"]
+dev = ["pytest"]
+
+[project.scripts]
+mcsparse = "mcsparse.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mcsparse*"]
+
+[tool.setuptools.package-data]
+# Must live INSIDE the package. "../examples/*.jsonl" silently shipped nothing,
+# so `mcsparse examples` and a bare `mcsparse run` broke once installed as a
+# wheel (they worked from a source checkout, which is why it went unnoticed).
+# examples/prompts.jsonl at the repo root is kept as the editable-install copy.
+"mcsparse" = ["examples/*.jsonl"]

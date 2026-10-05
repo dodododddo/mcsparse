@@ -1,0 +1,16 @@
+mcsparse
+Copyright 2026 the mcsparse authors
+
+The token-sparse kernels under mcsparse/kernels/flash_mcsa are derived from
+FlashMCSA by the same authors.
+
+The CuTeDSL sparse-attention implementation under
+mcsparse/kernels/flash_mcsa/ops/flash_sparse_attn/cute builds on code from
+FlashAttention-4 (FA4), part of the FlashAttention project:
+https://github.com/Dao-AILab/flash-attention
+
+It also uses code and utilities from NVIDIA CUTLASS / CuTeDSL:
+https://github.com/NVIDIA/cutlass
+
+FlashAttention and CUTLASS upstream BSD 3-Clause notices apply to the
+corresponding derived files. Existing source copyright notices are retained.
