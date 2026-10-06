@@ -2,7 +2,7 @@
 
 Code for **MC-Sparse: Deconstructing and Closing the Dense–Sparse Attention Gap in Diffusion Transformers**.
 
-**[Project page](https://dodododddo.github.io/mcsparse-project-page/)** · [Paper]()
+**[Project page](https://dodododddo.github.io/mcsparse-project-page/)** · [Paper](https://arxiv.org/abs/2610.06801)
 
 [![MC-Sparse teaser from the paper, with quality, efficiency, and Dense/Ours comparisons.](docs/assets/teaser.png)](https://dodododddo.github.io/mcsparse-project-page/)
 
